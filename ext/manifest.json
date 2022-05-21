@@ -1,0 +1,37 @@
+{
+  "name": "%app_name%",
+  "version": "1.0",
+  "description": "%app_tagline%",
+  "manifest_version": 3,
+  "background": {
+    "service_worker": "background.js"
+  },
+  "homepage_url": "https://www.codedrops.tech",
+  "permissions": [
+    "declarativeContent",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://localhost/*"
+      ],
+      "js": [
+        "./build/script.js"
+      ]
+    }
+  ],
+  "commands": {
+    "_execute_action": {
+      "suggested_key": "Ctrl+U",
+      "description": "Open popup application"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "64": "icons/icon64.png",
+    "128": "icons/icon128.png"
+  }
+}

@@ -1,0 +1,61 @@
+@import "@codedrops/react-ui/dist/styles/colors.scss";
+
+section#about {
+  display: flex;
+  flex-direction: column;
+  .block {
+    border-bottom: 1px solid $strokeOne;
+    padding-bottom: 16px;
+    margin-bottom: 8px;
+    .header-row {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 8px;
+      margin-bottom: 8px;
+      h3 {
+        margin: 0;
+      }
+    }
+    &:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+  }
+  .wrapper {
+    margin-bottom: 4px;
+    span {
+      color: $bar;
+      font-weight: bold;
+    }
+    .link {
+      color: $blue;
+      font-weight: bold;
+      &:hover {
+        text-decoration-color: $blue;
+      }
+    }
+  }
+  .products-list {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: 110px;
+    .product-item {
+      border: 1px solid $strokeOne;
+      padding: 8px;
+      background: $feather;
+      .product-title {
+        font-weight: bold;
+        text-decoration: underline;
+        margin-bottom: 8px;
+      }
+      .product-description {
+        line-height: 14px;
+      }
+      &:hover {
+        background: $bg;
+      }
+    }
+  }
+}

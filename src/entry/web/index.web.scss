@@ -1,0 +1,16 @@
+@import "@codedrops/react-ui/dist/styles/defaults.scss";
+
+html {
+  font-size: 10px;
+  font-family: "Roboto Mono", monospace;
+}
+
+.react-ui {
+  height: 100%;
+  background-color: #ffffff;
+  background-size: 15px 15px;
+  background-image: radial-gradient(#3b3b3b 0.75px, #ffffff 0.75px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
