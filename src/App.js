@@ -9,6 +9,7 @@ import config from "./config";
 import { MemoryRouter, BrowserRouter } from "react-router-dom";
 import store from "./redux/store";
 import { Provider } from "react-redux";
+import "antd/dist/antd.css";
 
 // axios.defaults.baseURL = config.SERVER_URL;
 // axios.defaults.headers.common["external-source"] = DEVBOX";
