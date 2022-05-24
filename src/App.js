@@ -11,7 +11,7 @@ import store from "./redux/store";
 import { Provider } from "react-redux";
 
 // axios.defaults.baseURL = config.SERVER_URL;
-// axios.defaults.headers.common["external-source"] = %app_id%";
+// axios.defaults.headers.common["external-source"] = DEVBOX";
 
 // Sentry.init({
 //   environment: config.NODE_ENV,
@@ -37,7 +37,9 @@ const AppWrapper = () => (
 );
 
 const App = () => {
-  const [appVisibility, setAppVisibility] = useState(config.DEFAULT_STATE);
+  const [appVisibility, setAppVisibility] = useState(
+    config.DEFAULT_EXT_VISIBILITY_STATE
+  );
 
   const toggleState = () => setAppVisibility((prev) => !prev);
 

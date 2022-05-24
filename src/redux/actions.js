@@ -28,7 +28,7 @@ const setActivePage = (page) => ({
 const fetchEntityData = () => async (dispatch, getState) => {
   try {
     dispatch(setAppLoading(true));
-    const { data } = await axios.get(`/%app_name%`);
+    const { data } = await axios.get(`/devbox`);
     dispatch({ type: constants.FETCH_ENTITY_DATA, payload: data });
   } catch (error) {
     handleError(error);
@@ -44,7 +44,7 @@ const addEntity = () => async (dispatch, getState) => {
     dispatch(setAppLoading(true));
     const {
       data: { result },
-    } = await axios.post("/%app_name%", data);
+    } = await axios.post("/devbox", data);
 
     dispatch({
       type: constants.ADD_ENTITY,
@@ -72,7 +72,7 @@ const updateEntity = (update) => ({
 const deleteEntity = (_id) => async (dispatch, getState) => {
   try {
     dispatch(setAppLoading(true));
-    await axios.delete(`/%app_name%/${_id}`);
+    await axios.delete(`/devbox/${_id}`);
     dispatch({ type: constants.DELETE_ENTITY, payload: _id });
     notify(`Deleted`);
   } catch (error) {

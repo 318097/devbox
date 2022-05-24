@@ -11,7 +11,8 @@ const isProd = __ENV__ === "production";
 const config = {
   SERVER_URL: getServerURL({ isProd }),
   IS_LOCAL_STORAGE: __TYPE__ === "app",
-  DEFAULT_STATE: __TYPE__ === "app",
+  DEFAULT_EXT_VISIBILITY_STATE:
+    __TYPE__ === "app" || (__TYPE__ === "ext" && __ENV__ === "development"),
   isExtension: __TYPE__ === "ext",
   isApp: __TYPE__ === "app",
   NODE_ENV: __ENV__,

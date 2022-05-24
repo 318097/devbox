@@ -8,14 +8,27 @@ import tracker from "../../lib/mixpanel";
 const Home = ({ data = [] }) => {
   return (
     <section id="home">
-      <div className="list-container">
-        {data.length ? (
-          <>{data.map((item) => {})}</>
-        ) : (
-          <div className="empty-message">Empty</div>
-        )}
-      </div>
+      {data.length ? (
+        <div className="list-container">
+          {data.map((item) => (
+            <DataItem key={item._id} item={item} />
+          ))}
+        </div>
+      ) : (
+        <div className="empty-message">Empty</div>
+      )}
     </section>
+  );
+};
+
+const DataItem = ({ item }) => {
+  const { label, value } = item;
+
+  return (
+    <div className="data-item">
+      <div>{label}</div>
+      <div>{value}</div>
+    </div>
   );
 };
 
