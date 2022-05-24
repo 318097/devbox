@@ -37,21 +37,15 @@ const fetchEntityData = () => async (dispatch, getState) => {
   }
 };
 
-const addEntity = () => async (dispatch, getState) => {
-  const { data } = getState();
-
+const addEntity = (obj) => async (dispatch, getState) => {
   try {
     dispatch(setAppLoading(true));
-    const {
-      data: { result },
-    } = await axios.post("/devbox", data);
-
     dispatch({
       type: constants.ADD_ENTITY,
-      payload: result,
+      payload: obj,
     });
     notify("Created");
-    tracker.track("ADD_ENTITY");
+    // tracker.track("ADD_ENTITY");
   } catch (error) {
     handleError(error);
   } finally {

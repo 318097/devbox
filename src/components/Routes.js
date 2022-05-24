@@ -16,6 +16,9 @@ const Routes = () => (
     <Route exact path={`/add-item`}>
       <AddItem />
     </Route>
+    <Route exact>
+      <Home />
+    </Route>
   </Switch>
 );
 

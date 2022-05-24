@@ -21,13 +21,11 @@ const AppContent = ({
   setSession,
   setKey,
   setAppLoading,
-  activePage,
-  session = {},
-  appLoading,
   toggleState,
+  entityList,
 }) => {
   const history = useHistory();
-  const [initLoading, setInitLoading] = useState(false);
+  const [initLoading, setInitLoading] = useState(true);
 
   useEffect(() => {
     load();
@@ -35,7 +33,7 @@ const AppContent = ({
 
   useEffect(() => {
     save();
-  }, [session, activePage]);
+  }, [entityList]);
 
   const load = () => {
     getDataFromStorage(async (state) => {
@@ -43,8 +41,7 @@ const AppContent = ({
         /* Rehydrate the store */
         setKey(state);
 
-        const { activePage } = state;
-        history.push(`/${activePage}`);
+        console.log("reading::-", state);
       } catch (error) {
         handleError(error);
       } finally {
@@ -56,13 +53,8 @@ const AppContent = ({
 
   const save = () => {
     // if (initLoading) return;
-    // const updatedSession = { ...(session || {}), isAuthenticated: false };
-    // const dataToSave = {
-    //   session: updatedSession,
-    //   activePage,
-    // };
-    // // console.log("saving:", dataToSave);
-    // setDataInStorage(dataToSave);
+    console.log("saving:", { entityList });
+    setDataInStorage({ entityList });
   };
 
   return (
@@ -77,15 +69,9 @@ const AppContent = ({
       </div>
       <div className="sec">
         {!initLoading && (
-          <Routes
-            appLoading={appLoading}
-            setAppLoading={setAppLoading}
-            setSession={setSession}
-          />
+          <Routes setAppLoading={setAppLoading} setSession={setSession} />
         )}
-        {(initLoading || appLoading) && (
-          <Loading type="dot-loader" background="white" />
-        )}
+        {initLoading && <Loading type="dot-loader" background="white" />}
       </div>
 
       <Footer />
@@ -93,10 +79,7 @@ const AppContent = ({
   );
 };
 
-const mapStateToProps = ({ session = {}, appLoading }) => ({
-  session,
-  appLoading,
-});
+const mapStateToProps = ({ entityList }) => ({ entityList });
 
 const mapDispatchToProps = {
   setAppLoading,

@@ -4,19 +4,26 @@ import { connect } from "react-redux";
 import classnames from "classnames";
 import "./Home.scss";
 import tracker from "../../lib/mixpanel";
+import { ButtonWrapper } from "../../lib/UI";
+import { useHistory } from "react-router-dom";
 
-const Home = ({ data = [] }) => {
+const Home = ({ entityList = [] }) => {
+  const history = useHistory();
+
   return (
     <section id="home">
-      {data.length ? (
+      {entityList.length ? (
         <div className="list-container">
-          {data.map((item) => (
+          {entityList.map((item) => (
             <DataItem key={item._id} item={item} />
           ))}
         </div>
       ) : (
         <div className="empty-message">Empty</div>
       )}
+      <ButtonWrapper onClick={() => history.push("/add-item")}>
+        Add new
+      </ButtonWrapper>
     </section>
   );
 };
@@ -32,8 +39,8 @@ const DataItem = ({ item }) => {
   );
 };
 
-// const mapStateToProps = (state) => {};
-// const mapDispatchToProps = {};
-// export default connect(mapStateToProps, mapDispatchToProps)(Home);
-
-export default Home;
+const mapStateToProps = ({ entityList }) => ({
+  entityList,
+});
+const mapDispatchToProps = {};
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

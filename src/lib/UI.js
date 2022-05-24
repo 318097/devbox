@@ -61,6 +61,11 @@ const RadioWrapper = (props) => {
 const InputWrapper = (props) => {
   const { type, onChange, required, error, label, ...rest } = props;
 
+  const handleOnChange = (e) => {
+    const value = e.currentTarget.value;
+    onChange(e, value, { name: value });
+  };
+
   const field =
     type === "password" ? (
       <Input.Password
@@ -70,10 +75,7 @@ const InputWrapper = (props) => {
     ) : type === "textarea" ? (
       <TextArea {...rest} onChange={(e) => onChange(e, e.target.value)} />
     ) : (
-      <Input
-        {...rest}
-        onChange={(e) => onChange({ value: e.currentTarget.value })}
-      />
+      <Input {...rest} onChange={handleOnChange} />
     );
 
   return field;
