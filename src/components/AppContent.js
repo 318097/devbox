@@ -52,7 +52,7 @@ const AppContent = ({
   };
 
   const save = () => {
-    // if (initLoading) return;
+    if (initLoading) return;
     console.log("saving:", { entityList });
     setDataInStorage({ entityList });
   };
@@ -60,21 +60,19 @@ const AppContent = ({
   return (
     <Card className="app-content" hover={false}>
       <Header />
-      <div className="fcc gap-8">
-        {config.isExtension && (
-          <button className="close-button" onClick={toggleState}>
-            Close
-          </button>
-        )}
-      </div>
       <div className="sec">
         {!initLoading && (
           <Routes setAppLoading={setAppLoading} setSession={setSession} />
         )}
         {initLoading && <Loading type="dot-loader" background="white" />}
       </div>
-
       <Footer />
+
+      {config.isExtension && (
+        <button className="close-button" onClick={toggleState}>
+          Close
+        </button>
+      )}
     </Card>
   );
 };

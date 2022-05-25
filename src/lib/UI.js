@@ -62,8 +62,9 @@ const InputWrapper = (props) => {
   const { type, onChange, required, error, label, ...rest } = props;
 
   const handleOnChange = (e) => {
+    const key = props.name;
     const value = e.currentTarget.value;
-    onChange(e, value, { name: value });
+    onChange(e, value, { [key]: value });
   };
 
   const field =

@@ -7,6 +7,25 @@ import tracker from "../../lib/mixpanel";
 import { ButtonWrapper } from "../../lib/UI";
 import { useHistory } from "react-router-dom";
 
+const parseJSON = ({ keyValue }) => {
+  try {
+    const value = JSON.parse(keyValue);
+    return { value, type: "JSON" };
+  } catch (e) {
+    return { value: keyValue, type: "STRING" };
+  }
+};
+
+const parseValue = ({ keyName, path }) => {
+  const keyValue = localStorage.getItem(keyName);
+
+  if (!keyValue) return "UNDEFINED_KEY";
+
+  const { value, type } = parseJSON({ keyValue });
+
+  return (type === "JSON" ? _.get(value, path) : value) || "UNDEFINED_VALUE";
+};
+
 const Home = ({ entityList = [] }) => {
   const history = useHistory();
 
@@ -14,8 +33,8 @@ const Home = ({ entityList = [] }) => {
     <section id="home">
       {entityList.length ? (
         <div className="list-container">
-          {entityList.map((item) => (
-            <DataItem key={item._id} item={item} />
+          {entityList.map((entity) => (
+            <EntityItem key={entity._id} entity={entity} />
           ))}
         </div>
       ) : (
@@ -28,13 +47,17 @@ const Home = ({ entityList = [] }) => {
   );
 };
 
-const DataItem = ({ item }) => {
-  const { label, value } = item;
+const EntityItem = ({ entity }) => {
+  const { label, keyName, path } = entity;
+
+  const value = parseValue({ keyName, path });
+  const parsedLabel = value === "UNDEFINED_KEY" ? value : label;
+  const parsedValue = value === "UNDEFINED_KEY" ? "-" : value;
 
   return (
-    <div className="data-item">
-      <div>{label}</div>
-      <div>{value}</div>
+    <div className="entity-item">
+      <div className="entity-label">{parsedLabel}</div>
+      <div className="entity-value">{parsedValue}</div>
     </div>
   );
 };

@@ -1,4 +1,17 @@
 @import "@codedrops/react-ui/dist/styles/colors.scss";
 
 section#home {
+  .list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    .entity-item {
+      border-radius: 2px;
+      border: 1px solid $strokeOne;
+      padding: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
 }
