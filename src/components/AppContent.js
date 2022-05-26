@@ -13,9 +13,9 @@ import Header from "./Header";
 import Routes from "./Routes";
 import tracker from "../lib/mixpanel";
 import { setSession, setKey, setAppLoading } from "../redux/actions";
-import { INITIAL_STATE } from "../redux/reducer";
 import config from "../config";
 import Footer from "./Footer";
+import "antd/dist/antd.css";
 
 const AppContent = ({
   setSession,

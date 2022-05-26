@@ -75,6 +75,13 @@ module.exports = (env) => {
     // },
   ];
 
+  const styleLoaderObj = {
+    loader: "style-loader",
+    options: {
+      attributes: { class: "webpack-compiled-tags" },
+    },
+  };
+
   return {
     entry,
     mode,
@@ -103,11 +110,11 @@ module.exports = (env) => {
         },
         {
           test: /\.scss$/,
-          use: ["style-loader", "css-loader", "sass-loader"],
+          use: [styleLoaderObj, "css-loader", "sass-loader"],
         },
         {
           test: /\.css$/,
-          use: ["style-loader", "css-loader"],
+          use: [styleLoaderObj, "css-loader"],
         },
         {
           test: /\.(ttf|otf)$/,

@@ -1,5 +1,5 @@
-import React, { useState, Fragment } from "react";
-import "./App.scss";
+import React, { useState, useEffect, Fragment } from "react";
+
 // import axios from "axios";
 import AppContent from "./components/AppContent";
 import classnames from "classnames";
@@ -9,7 +9,7 @@ import config from "./config";
 import { MemoryRouter, BrowserRouter } from "react-router-dom";
 import store from "./redux/store";
 import { Provider } from "react-redux";
-import "antd/dist/antd.css";
+import Iframe from "./lib/wrapWithIFrame";
 
 // axios.defaults.baseURL = config.SERVER_URL;
 // axios.defaults.headers.common["external-source"] = DEVBOX";
@@ -50,23 +50,25 @@ const App = () => {
   });
 
   return (
-    <div className="react-ui">
-      {config.isApp ? (
-        <div className={applicationContainerClasses}>
-          <AppContent />
-        </div>
-      ) : (
-        <Fragment>
-          {appVisibility ? (
-            <div className={applicationContainerClasses}>
-              <AppContent toggleState={toggleState} />
-            </div>
-          ) : (
-            <span className="dot" onClick={toggleState}></span>
-          )}
-        </Fragment>
-      )}
-    </div>
+    <Iframe appVisibility={appVisibility}>
+      <div className="react-ui">
+        {config.isApp ? (
+          <div className={applicationContainerClasses}>
+            <AppContent />
+          </div>
+        ) : (
+          <Fragment>
+            {appVisibility ? (
+              <div className={applicationContainerClasses}>
+                <AppContent toggleState={toggleState} />
+              </div>
+            ) : (
+              <span className="dot" onClick={toggleState}></span>
+            )}
+          </Fragment>
+        )}
+      </div>
+    </Iframe>
   );
 };
 
