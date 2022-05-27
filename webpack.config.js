@@ -66,7 +66,7 @@ module.exports = (env) => {
     //   plugin: new SentryWebpackPlugin({
     //     authToken: process.env.SENTRY_AUTH_TOKEN,
     //     org: "mehul-lakhanpals-projects",
-    //     project: "> DEVBOX",
+    //     project: "DEVBOX",
     //     release: process.env.SENTRY_RELEASE,
     //     include: ".",
     //     url: "https://sentry.io/",

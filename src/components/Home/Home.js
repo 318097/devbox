@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import classnames from "classnames";
 import "./Home.scss";
 import tracker from "../../lib/mixpanel";
-import { ButtonWrapper } from "../../lib/UI";
+import { IconWrapper, EmptyWrapper } from "../../lib/UI";
 import { useHistory } from "react-router-dom";
 
 const parseJSON = ({ keyValue }) => {
@@ -38,11 +38,13 @@ const Home = ({ entityList = [] }) => {
           ))}
         </div>
       ) : (
-        <div className="empty-message">Empty</div>
+        <EmptyWrapper />
       )}
-      <ButtonWrapper onClick={() => history.push("/add-item")}>
-        Add new
-      </ButtonWrapper>
+      <IconWrapper
+        onClick={() => history.push("/add-item")}
+        type={"plus"}
+        className="add-icon"
+      />
     </section>
   );
 };

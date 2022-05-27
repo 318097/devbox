@@ -1,6 +1,6 @@
 {
   "action": {
-    "default_title": "> DEVBOX",
+    "default_title": "DEVBOX",
     "default_popup": "./build/index.html",
     "default_icon": {
       "16": "icons/icon16.png",

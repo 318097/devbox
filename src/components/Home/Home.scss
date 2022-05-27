@@ -1,6 +1,12 @@
 @import "@codedrops/react-ui/dist/styles/colors.scss";
 
 section#home {
+  position: relative;
+  .add-icon {
+    position: absolute;
+    bottom: 0px;
+    right: 8px;
+  }
   .list-container {
     display: flex;
     flex-direction: column;

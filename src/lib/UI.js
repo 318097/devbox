@@ -10,6 +10,7 @@ import {
   Dropdown,
   Alert,
   Radio,
+  Empty,
 } from "antd";
 import _ from "lodash";
 import {
@@ -20,6 +21,17 @@ import {
 } from "@ant-design/icons";
 
 const { TextArea } = Input;
+
+const iconDefault = {
+  cursor: "pointer",
+  background: "whitesmoke",
+  display: "inline-flex",
+  width: "20px",
+  height: "20px",
+  borderRadius: "4px",
+  alignItems: "center",
+  justifyContent: "center",
+};
 
 const getIcon = (type) => {
   switch (type) {
@@ -35,9 +47,13 @@ const getIcon = (type) => {
 };
 
 const IconWrapper = (props) => {
-  const { type } = props;
+  const { type, ...rest } = props;
   const icon = getIcon(type);
-  return icon;
+  return (
+    <span {...rest} style={iconDefault}>
+      {icon}
+    </span>
+  );
 };
 
 const ButtonWrapper = (props) => {
@@ -110,6 +126,10 @@ const MenuWrapper = (props) => {
   );
 };
 
+const EmptyWrapper = () => {
+  return <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />;
+};
+
 export {
   IconWrapper,
   ButtonWrapper,
@@ -119,4 +139,5 @@ export {
   CardWrapper,
   AlertWrapper,
   RadioWrapper,
+  EmptyWrapper,
 };

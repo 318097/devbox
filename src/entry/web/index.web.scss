@@ -5,6 +5,12 @@ html {
   font-family: "Roboto Mono", monospace;
 }
 
+#root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .react-ui {
   height: 100%;
   background-color: #ffffff;

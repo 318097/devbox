@@ -27,31 +27,38 @@ const AddItem = ({ addEntity }) => {
     history.push("/");
   };
 
+  const goBack = () => history.push("/");
+
   const handleOnChange = (e, value, valObj) => setFormData(valObj);
 
   return (
     <section id="add-item">
-      Add item
-      <div className="add-item-container">
+      <h3>Add item</h3>
+      <div className="add-item-container flex column gap-2">
         <InputWrapper
           placeholder={"Label"}
           value={formData.label}
           name={"label"}
           onChange={handleOnChange}
         />
-        <InputWrapper
-          placeholder={"Key name"}
-          value={formData.keyName}
-          name={"keyName"}
-          onChange={handleOnChange}
-        />
-        <InputWrapper
-          placeholder={"Path"}
-          value={formData.path}
-          name={"path"}
-          onChange={handleOnChange}
-        />
-        <ButtonWrapper onClick={addPair}>Add</ButtonWrapper>
+        <div className="flex gap-2">
+          <InputWrapper
+            placeholder={"Key name"}
+            value={formData.keyName}
+            name={"keyName"}
+            onChange={handleOnChange}
+          />
+          <InputWrapper
+            placeholder={"Path"}
+            value={formData.path}
+            name={"path"}
+            onChange={handleOnChange}
+          />
+        </div>
+        <div className="flex gap-2 mt">
+          <ButtonWrapper onClick={goBack}>Cancel</ButtonWrapper>
+          <ButtonWrapper onClick={addPair}>Add</ButtonWrapper>
+        </div>
       </div>
     </section>
   );

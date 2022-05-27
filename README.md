@@ -1,3 +1,3 @@
-## > DEVBOX
+## DEVBOX
 
 #### v1
