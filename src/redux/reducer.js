@@ -1,5 +1,6 @@
 import _ from "lodash";
 import constants from "./constants";
+import shortid from "shortid";
 
 const INITIAL_ENTITY_FORM_DATA = {};
 
@@ -7,10 +8,12 @@ const INITIAL_STATE = {
   appLoading: false,
   selectedEntity: null,
   entityFormData: INITIAL_ENTITY_FORM_DATA,
-  activePage: null,
+  entityFormMode: "ADD",
   session: {},
   entityList: [],
 };
+
+const generateId = () => shortid.generate();
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -47,23 +50,27 @@ const reducer = (state, action) => {
       };
 
     case constants.ADD_ENTITY: {
-      const { entityList = [] } = state;
+      const { entityList = [], entityFormData } = state;
+      const newObj = { ...entityFormData, _id: generateId() };
       return {
         ...state,
-        entityList: [...entityList, action.payload],
+        entityList: [...entityList, newObj],
         entityFormData: INITIAL_ENTITY_FORM_DATA,
+        entityFormMode: "ADD",
       };
     }
 
     case constants.SET_ENTITY_FOR_EDIT: {
       const { entityList } = state;
-      const { _id } = action.payload;
+      const _id = action.payload;
 
       const selectedEntity = _.find(entityList, { _id });
 
       return {
         ...state,
         selectedEntity,
+        entityFormData: _.pick(selectedEntity, ["label", "keyName", "path"]),
+        entityFormMode: "EDIT",
       };
     }
 
@@ -78,6 +85,7 @@ const reducer = (state, action) => {
         entityList: updatedEntityList,
         selectedEntity: null,
         entityFormData: INITIAL_ENTITY_FORM_DATA,
+        entityFormMode: "ADD",
       };
     }
 
@@ -103,6 +111,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         entityFormData: INITIAL_ENTITY_FORM_DATA,
+        entityFormMode: "ADD",
       };
 
     default:

@@ -37,14 +37,13 @@ const fetchEntityData = () => async (dispatch, getState) => {
   }
 };
 
-const addEntity = (obj) => async (dispatch, getState) => {
+const addEntity = () => async (dispatch) => {
   try {
     dispatch(setAppLoading(true));
-    dispatch({
+    await dispatch({
       type: constants.ADD_ENTITY,
-      payload: obj,
     });
-    notify("Created");
+    notify("Created.");
     // tracker.track("ADD_ENTITY");
   } catch (error) {
     handleError(error);
@@ -59,15 +58,14 @@ const setEntityForEdit = (_id) => ({
 });
 
 const updateEntity = (update) => ({
-  type: constants.SET_ENTITY_FOR_EDIT,
+  type: constants.UPDATE_ENTITY,
   payload: update,
 });
 
-const deleteEntity = (_id) => async (dispatch, getState) => {
+const deleteEntity = (_id) => async (dispatch) => {
   try {
     dispatch(setAppLoading(true));
-    await axios.delete(`/devbox/${_id}`);
-    dispatch({ type: constants.DELETE_ENTITY, payload: _id });
+    await dispatch({ type: constants.DELETE_ENTITY, payload: _id });
     notify(`Deleted`);
   } catch (error) {
     handleError(error);

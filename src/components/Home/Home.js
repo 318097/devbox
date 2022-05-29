@@ -13,6 +13,7 @@ import {
 import { useHistory } from "react-router-dom";
 import { copyToClipboard } from "@codedrops/lib";
 import notify from "../../lib/notify";
+import { setEntityForEdit, deleteEntity } from "../../redux/actions";
 
 const parseJSON = ({ keyValue }) => {
   try {
@@ -33,15 +34,31 @@ const parseValue = ({ keyName, path }) => {
   return (type === "JSON" ? _.get(value, path) : value) || "UNDEFINED_VALUE";
 };
 
-const Home = ({ entityList = [] }) => {
+const Home = ({ entityList = [], setEntityForEdit, deleteEntity }) => {
   const history = useHistory();
+
+  const handleAction = (action, _id) => {
+    switch (action) {
+      case "edit":
+        setEntityForEdit(_id);
+        history.push("/add-item");
+        break;
+      case "delete":
+        deleteEntity(_id);
+        break;
+    }
+  };
 
   return (
     <section id="home">
       {entityList.length ? (
         <div className="list-container">
           {entityList.map((entity) => (
-            <EntityItem key={entity._id} entity={entity} />
+            <EntityItem
+              key={entity._id}
+              entity={entity}
+              handleAction={handleAction}
+            />
           ))}
         </div>
       ) : (
@@ -56,8 +73,8 @@ const Home = ({ entityList = [] }) => {
   );
 };
 
-const EntityItem = ({ entity }) => {
-  const { label, keyName, path } = entity;
+const EntityItem = ({ entity, handleAction }) => {
+  const { label, keyName, path, _id } = entity;
 
   const value = parseValue({ keyName, path });
   const parsedLabel = value === "UNDEFINED_KEY" ? value : label;
@@ -79,6 +96,7 @@ const EntityItem = ({ entity }) => {
       </TagWrapper>
 
       <MenuWrapper
+        onChange={(action) => handleAction(action, _id)}
         options={[
           { label: "Edit", value: "edit" },
           { label: "Delete", value: "delete" },
@@ -91,6 +109,6 @@ const EntityItem = ({ entity }) => {
 const mapStateToProps = ({ entityList }) => ({
   entityList,
 });
-const mapDispatchToProps = {};
+const mapDispatchToProps = { setEntityForEdit, deleteEntity };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

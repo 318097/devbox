@@ -1,69 +1,92 @@
-import React, { Fragment } from "react";
+import React from "react";
 import _ from "lodash";
 import { connect } from "react-redux";
-import classnames from "classnames";
 import "./AddItem.scss";
-import tracker from "../../lib/mixpanel";
 import { InputWrapper, ButtonWrapper } from "../../lib/UI";
-import { useObject } from "@codedrops/lib";
-import { addEntity } from "../../redux/actions";
+import {
+  addEntity,
+  updateEntityData,
+  clearEntityFormData,
+  updateEntity,
+} from "../../redux/actions";
 import { useHistory } from "react-router-dom";
-import shortid from "shortid";
 
 const sourceOptions = [
   { label: "Local storage", value: "LOCAL_STORAGE" },
   { label: "Session storage", value: "SESSION_STORAGE" },
 ];
 
-const generateId = () => shortid.generate();
-
-const AddItem = ({ addEntity }) => {
+const AddItem = ({
+  addEntity,
+  entityFormData,
+  updateEntityData,
+  entityFormMode,
+  updateEntity,
+  selectedEntity,
+}) => {
   const history = useHistory();
-  const [formData, setFormData, resetFormData] = useObject();
 
   const addPair = async () => {
-    await addEntity({ ...formData, _id: generateId() });
-    resetFormData();
+    if (entityFormMode === "EDIT")
+      await updateEntity({ ...selectedEntity, ...entityFormData });
+    else await addEntity();
     history.push("/");
   };
 
   const goBack = () => history.push("/");
 
-  const handleOnChange = (e, value, valObj) => setFormData(valObj);
+  const handleOnChange = (e, value, valObj) => updateEntityData(valObj);
 
   return (
     <section id="add-item">
-      <h3>Add item</h3>
+      <h3>{`${entityFormMode === "EDIT" ? "Edit" : "Add"} item`}</h3>
       <div className="add-item-container flex column gap-2">
         <InputWrapper
           placeholder={"Label"}
-          value={formData.label}
+          value={entityFormData.label}
           name={"label"}
           onChange={handleOnChange}
         />
         <div className="flex gap-2">
           <InputWrapper
             placeholder={"Key name"}
-            value={formData.keyName}
+            value={entityFormData.keyName}
             name={"keyName"}
             onChange={handleOnChange}
           />
           <InputWrapper
             placeholder={"Path"}
-            value={formData.path}
+            value={entityFormData.path}
             name={"path"}
             onChange={handleOnChange}
           />
         </div>
         <div className="flex gap-2 mt">
           <ButtonWrapper onClick={goBack}>Cancel</ButtonWrapper>
-          <ButtonWrapper onClick={addPair}>Add</ButtonWrapper>
+          <ButtonWrapper onClick={addPair}>{`${
+            entityFormMode === "EDIT" ? "Update" : "Add"
+          }`}</ButtonWrapper>
         </div>
       </div>
     </section>
   );
 };
 
-const mapStateToProps = (state) => ({});
-const mapDispatchToProps = { addEntity };
+const mapStateToProps = ({
+  entityFormData,
+  entityFormMode,
+  selectedEntity,
+}) => ({
+  entityFormData,
+  entityFormMode,
+  selectedEntity,
+});
+
+const mapDispatchToProps = {
+  addEntity,
+  updateEntityData,
+  clearEntityFormData,
+  updateEntity,
+};
+
 export default connect(mapStateToProps, mapDispatchToProps)(AddItem);
