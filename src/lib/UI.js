@@ -32,6 +32,7 @@ const iconDefault = {
   borderRadius: "4px",
   alignItems: "center",
   justifyContent: "center",
+  flexShrink: 0,
 };
 
 const getIcon = (type) => {

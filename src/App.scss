@@ -24,6 +24,7 @@
     flex-grow: 1;
     border: 1px solid $bg;
     box-shadow: none;
+    overflow: hidden;
     header {
       width: 100%;
       display: flex;
@@ -44,9 +45,9 @@
     }
     .sec {
       flex: 1 1 auto;
-      overflow: auto;
       position: relative;
       margin-bottom: 8px;
+      overflow: auto;
       section {
         padding: 0 8px;
         height: 100%;
@@ -73,4 +74,25 @@
       }
     }
   }
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

@@ -30,8 +30,9 @@ const parseValue = ({ keyName, path }) => {
   if (!keyValue) return "UNDEFINED_KEY";
 
   const { value, type } = parseJSON({ keyValue });
+  const processedValue = type === "JSON" ? _.get(value, path) : value;
 
-  return (type === "JSON" ? _.get(value, path) : value) || "UNDEFINED_VALUE";
+  return String(processedValue) ?? "UNDEFINED_VALUE";
 };
 
 const Home = ({ entityList = [], setEntityForEdit, deleteEntity }) => {
@@ -89,7 +90,9 @@ const EntityItem = ({ entity, handleAction }) => {
     <div className="entity-item">
       <div className="entity-section-wrapper">
         <div className="entity-label">{parsedLabel}</div>
-        <div className="entity-path">{`'${keyName}.${path}'`}</div>
+        <div className="entity-path">
+          {path ? `'${keyName}.${path}'` : `'${keyName}`}
+        </div>
       </div>
       <TagWrapper className="entity-value" onClick={copy}>
         {parsedValue}

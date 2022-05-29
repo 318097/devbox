@@ -1,10 +1,17 @@
 @import "@codedrops/react-ui/dist/styles/colors.scss";
 
+.text-overflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 section#home {
   position: relative;
+
   .add-icon {
-    position: absolute;
-    bottom: 0px;
+    position: fixed;
+    bottom: 8px;
     right: 8px;
   }
   .list-container {
@@ -19,31 +26,27 @@ section#home {
       flex-direction: row;
       align-items: center;
       justify-content: space-between;
+
       .entity-section-wrapper {
         display: flex;
         flex-direction: column;
-        // white-space: nowrap;
-        // overflow: hidden;
-        // text-overflow: ellipsis;
-        // max-width: 115px;
-      }
-      .entity-label,
-      .entity-value {
-        // white-space: nowrap;
-        // overflow: hidden;
-        // text-overflow: ellipsis;
-        // max-width: 112px;
+        flex: 0 0 40%;
+        margin-right: 8px;
+        overflow: hidden;
       }
       .entity-label {
         font-size: 1em;
         font-weight: bold;
+        @extend .text-overflow;
       }
       .entity-path {
         font-size: 0.8em;
+        @extend .text-overflow;
       }
       .entity-value {
         font-size: 1.1em;
         font-weight: bold;
+        @extend .text-overflow;
       }
       .divider {
         margin: 4px 0;

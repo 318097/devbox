@@ -41,7 +41,7 @@ const AppContent = ({
         /* Rehydrate the store */
         setKey(state);
 
-        console.log("reading::-", state);
+        // console.log("reading::-", state);
       } catch (error) {
         handleError(error);
       } finally {
@@ -53,7 +53,7 @@ const AppContent = ({
 
   const save = () => {
     if (initLoading) return;
-    console.log("saving:", { entityList });
+    // console.log("saving:", { entityList });
     setDataInStorage({ entityList });
   };
 
