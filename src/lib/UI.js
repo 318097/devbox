@@ -11,6 +11,7 @@ import {
   Alert,
   Radio,
   Empty,
+  Tag,
 } from "antd";
 import _ from "lodash";
 import {
@@ -111,16 +112,21 @@ const AlertWrapper = (props) => {
 };
 
 const MenuWrapper = (props) => {
-  const { menu = [], onChange } = props;
-  const overlay = (
-    <Menu>
-      {_.map(menu, ({ id, label, icon }) => (
-        <Menu.Item key={id}>{label}</Menu.Item>
-      ))}
-    </Menu>
-  );
+  const { options = [], onChange } = props;
+
+  const handleChange = (item) => {
+    onChange(item.key);
+  };
+
+  const items = _.map(options, ({ value, label }) => ({
+    label,
+    key: value, // key prop is required
+  }));
+
+  const menu = <Menu items={items} onClick={handleChange} />;
+
   return (
-    <Dropdown overlay={overlay} trigger={["click"]}>
+    <Dropdown overlay={menu} trigger={["click"]}>
       <IconWrapper type="more" />
     </Dropdown>
   );
@@ -128,6 +134,10 @@ const MenuWrapper = (props) => {
 
 const EmptyWrapper = () => {
   return <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />;
+};
+
+const TagWrapper = ({ children, ...rest }) => {
+  return <Tag {...rest}>{children}</Tag>;
 };
 
 export {
@@ -140,4 +150,5 @@ export {
   AlertWrapper,
   RadioWrapper,
   EmptyWrapper,
+  TagWrapper,
 };

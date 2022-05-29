@@ -22,7 +22,7 @@
     "@reduxjs/toolkit": "^1.6.1",
     "@sentry/react": "^6.11.0",
     "@sentry/tracing": "^6.11.0",
-    "antd": "^4.19.5",
+    "antd": "^4.20.0",
     "axios": "^0.21.1",
     "classnames": "^2.3.1",
     "dayjs": "^1.10.6",

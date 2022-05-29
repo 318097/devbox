@@ -16,8 +16,38 @@ section#home {
       border: 1px solid $strokeOne;
       padding: 8px;
       display: flex;
+      flex-direction: row;
       align-items: center;
       justify-content: space-between;
+      .entity-section-wrapper {
+        display: flex;
+        flex-direction: column;
+        // white-space: nowrap;
+        // overflow: hidden;
+        // text-overflow: ellipsis;
+        // max-width: 115px;
+      }
+      .entity-label,
+      .entity-value {
+        // white-space: nowrap;
+        // overflow: hidden;
+        // text-overflow: ellipsis;
+        // max-width: 112px;
+      }
+      .entity-label {
+        font-size: 1em;
+        font-weight: bold;
+      }
+      .entity-path {
+        font-size: 0.8em;
+      }
+      .entity-value {
+        font-size: 1.1em;
+        font-weight: bold;
+      }
+      .divider {
+        margin: 4px 0;
+      }
     }
   }
 }

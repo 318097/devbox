@@ -4,8 +4,15 @@ import { connect } from "react-redux";
 import classnames from "classnames";
 import "./Home.scss";
 import tracker from "../../lib/mixpanel";
-import { IconWrapper, EmptyWrapper } from "../../lib/UI";
+import {
+  IconWrapper,
+  EmptyWrapper,
+  MenuWrapper,
+  TagWrapper,
+} from "../../lib/UI";
 import { useHistory } from "react-router-dom";
+import { copyToClipboard } from "@codedrops/lib";
+import notify from "../../lib/notify";
 
 const parseJSON = ({ keyValue }) => {
   try {
@@ -56,10 +63,27 @@ const EntityItem = ({ entity }) => {
   const parsedLabel = value === "UNDEFINED_KEY" ? value : label;
   const parsedValue = value === "UNDEFINED_KEY" ? "-" : value;
 
+  const copy = () => {
+    copyToClipboard(parsedValue);
+    notify("Copied.");
+  };
+
   return (
     <div className="entity-item">
-      <div className="entity-label">{parsedLabel}</div>
-      <div className="entity-value">{parsedValue}</div>
+      <div className="entity-section-wrapper">
+        <div className="entity-label">{parsedLabel}</div>
+        <div className="entity-path">{`'${keyName}.${path}'`}</div>
+      </div>
+      <TagWrapper className="entity-value" onClick={copy}>
+        {parsedValue}
+      </TagWrapper>
+
+      <MenuWrapper
+        options={[
+          { label: "Edit", value: "edit" },
+          { label: "Delete", value: "delete" },
+        ]}
+      />
     </div>
   );
 };
@@ -68,4 +92,5 @@ const mapStateToProps = ({ entityList }) => ({
   entityList,
 });
 const mapDispatchToProps = {};
+
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
