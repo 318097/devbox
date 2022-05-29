@@ -5,9 +5,9 @@ const head = [];
 
 const styleTags = document.head.querySelectorAll(".webpack-compiled-tags");
 
-styleTags.forEach((link) => {
+styleTags.forEach((link, idx) => {
   if (link.textContent) {
-    const node = <style>{link.textContent}</style>;
+    const node = <style key={idx}>{link.textContent}</style>;
     head.push(node);
   }
 

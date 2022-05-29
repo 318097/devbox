@@ -1,5 +1,4 @@
 import React from "react";
-import _ from "lodash";
 import { connect } from "react-redux";
 import "./AddItem.scss";
 import { InputWrapper, ButtonWrapper } from "../../lib/UI";
@@ -11,10 +10,10 @@ import {
 } from "../../redux/actions";
 import { useHistory } from "react-router-dom";
 
-const sourceOptions = [
-  { label: "Local storage", value: "LOCAL_STORAGE" },
-  { label: "Session storage", value: "SESSION_STORAGE" },
-];
+// const sourceOptions = [
+//   { label: "Local storage", value: "LOCAL_STORAGE" },
+//   { label: "Session storage", value: "SESSION_STORAGE" },
+// ];
 
 const AddItem = ({
   addEntity,
@@ -39,15 +38,15 @@ const AddItem = ({
 
   return (
     <section id="add-item">
-      <h3>{`${entityFormMode === "EDIT" ? "Edit" : "Add"} item`}</h3>
-      <div className="add-item-container flex column gap-2">
+      <h3>{`${entityFormMode === "EDIT" ? "Edit" : "Add"} entry`}</h3>
+      <div className="add-item-container flex column gap-4">
         <InputWrapper
           placeholder={"Label"}
           value={entityFormData.label}
           name={"label"}
           onChange={handleOnChange}
         />
-        <div className="flex gap-2">
+        <div className="flex gap-4">
           <InputWrapper
             placeholder={"Key name"}
             value={entityFormData.keyName}
@@ -61,9 +60,9 @@ const AddItem = ({
             onChange={handleOnChange}
           />
         </div>
-        <div className="flex gap-2 mt">
+        <div className="flex gap-4">
           <ButtonWrapper onClick={goBack}>Cancel</ButtonWrapper>
-          <ButtonWrapper onClick={addPair}>{`${
+          <ButtonWrapper onClick={addPair} type="primary">{`${
             entityFormMode === "EDIT" ? "Update" : "Add"
           }`}</ButtonWrapper>
         </div>

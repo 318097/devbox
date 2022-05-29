@@ -14,6 +14,7 @@ const INITIAL_STATE = {
 };
 
 const generateId = () => shortid.generate();
+const generateTime = () => new Date().toISOString();
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -51,7 +52,11 @@ const reducer = (state, action) => {
 
     case constants.ADD_ENTITY: {
       const { entityList = [], entityFormData } = state;
-      const newObj = { ...entityFormData, _id: generateId() };
+      const newObj = {
+        ...entityFormData,
+        _id: generateId(),
+        createdAt: generateTime(),
+      };
       return {
         ...state,
         entityList: [...entityList, newObj],

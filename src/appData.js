@@ -1,6 +1,6 @@
 const app = {
   appId: "DEVBOX",
-  appName: "DEVBOX",
+  appName: "Devbox",
   appTagline: "%app_tagline%",
 };
 
