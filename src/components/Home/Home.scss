@@ -54,3 +54,14 @@ section#home {
     }
   }
 }
+.tooltip-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  .tooltip-item {
+    line-height: 0.8em;
+    span {
+      font-size: 0.7em;
+    }
+  }
+}

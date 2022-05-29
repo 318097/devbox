@@ -12,6 +12,7 @@ import {
   Radio,
   Empty,
   Tag,
+  Tooltip,
 } from "antd";
 import _ from "lodash";
 import {
@@ -141,6 +142,19 @@ const TagWrapper = ({ children, ...rest }) => {
   return <Tag {...rest}>{children}</Tag>;
 };
 
+const TooltipWrapper = ({ children, ...rest }) => {
+  return (
+    <Tooltip
+      {...rest}
+      placement="bottomRight"
+      trigger="click"
+      arrowPointAtCenter={true}
+    >
+      {children}
+    </Tooltip>
+  );
+};
+
 export {
   IconWrapper,
   ButtonWrapper,
@@ -152,4 +166,5 @@ export {
   RadioWrapper,
   EmptyWrapper,
   TagWrapper,
+  TooltipWrapper,
 };

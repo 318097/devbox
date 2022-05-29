@@ -9,6 +9,7 @@ import {
   EmptyWrapper,
   MenuWrapper,
   TagWrapper,
+  TooltipWrapper,
 } from "../../lib/UI";
 import { useHistory } from "react-router-dom";
 import { copyToClipboard } from "@codedrops/lib";
@@ -88,12 +89,38 @@ const EntityItem = ({ entity, handleAction }) => {
 
   return (
     <div className="entity-item">
-      <div className="entity-section-wrapper">
-        <div className="entity-label">{parsedLabel}</div>
-        <div className="entity-path">
-          {path ? `'${keyName}.${path}'` : `'${keyName}`}
+      <TooltipWrapper
+        title={
+          <div className="tooltip-wrapper">
+            <div className="tooltip-item">
+              <span>Label:</span>
+              <span>{parsedLabel}</span>
+            </div>
+            <div className="tooltip-item">
+              <span>Key name:</span>
+              <span>{keyName}</span>
+            </div>
+            {!!path && (
+              <div className="tooltip-item">
+                <span>Path:</span>
+                <span>{path}</span>
+              </div>
+            )}
+            <div className="tooltip-item">
+              <span>Value:</span>
+              <span>{`_.get(${keyName}, ${path})`}</span>
+            </div>
+          </div>
+        }
+      >
+        <div className="entity-section-wrapper">
+          <div className="entity-label">{parsedLabel}</div>
+          <div className="entity-path">
+            {path ? `'${keyName}.${path}'` : `'${keyName}`}
+          </div>
         </div>
-      </div>
+      </TooltipWrapper>
+
       <TagWrapper className="entity-value" onClick={copy}>
         {parsedValue}
       </TagWrapper>
