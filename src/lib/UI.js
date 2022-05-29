@@ -15,7 +15,7 @@ import {
 } from "antd";
 import _ from "lodash";
 import {
-  CloseCircleOutlined,
+  CloseOutlined,
   StarOutlined,
   PlusOutlined,
   MoreOutlined,
@@ -37,7 +37,7 @@ const iconDefault = {
 const getIcon = (type) => {
   switch (type) {
     case "close":
-      return <CloseCircleOutlined />;
+      return <CloseOutlined />;
     case "star":
       return <StarOutlined />;
     case "plus":

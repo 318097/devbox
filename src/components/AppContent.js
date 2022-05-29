@@ -59,7 +59,7 @@ const AppContent = ({
 
   return (
     <Card className="app-content" hover={false}>
-      <Header />
+      <Header toggleState={toggleState} />
       <div className="sec">
         {!initLoading && (
           <Routes setAppLoading={setAppLoading} setSession={setSession} />
@@ -67,12 +67,6 @@ const AppContent = ({
         {initLoading && <Loading type="dot-loader" background="white" />}
       </div>
       <Footer />
-
-      {config.isExtension && (
-        <button className="close-button" onClick={toggleState}>
-          Close
-        </button>
-      )}
     </Card>
   );
 };

@@ -1,41 +1,23 @@
-import React, { useEffect } from "react";
-import Navigation from "./Navigation";
-import { setActivePage, setKey } from "../redux/actions";
+import React from "react";
 import { connect } from "react-redux";
-import { useLocation } from "react-router-dom";
 import app from "../appData";
+import { IconWrapper } from "../lib/UI";
 
-const Header = ({
-  isAuthenticated,
-  activePage,
-  setKey,
-  logout,
-  setActivePage,
-}) => {
-  const location = useLocation();
-
-  useEffect(() => {
-    setActivePage(location.pathname.slice(1));
-  }, [location.pathname]);
-
+const Header = ({ toggleState }) => {
   return (
     <header>
       <div className="app-name-container">
         <div className="app-name">{app.appName}</div>
       </div>
-      <Navigation isAuthenticated={isAuthenticated} />
+      <IconWrapper
+        className="close-button"
+        onClick={toggleState}
+        type="close"
+      />
     </header>
   );
 };
 
-const mapStateToProps = ({ activePage, pendingTasksOnly, session }) => ({
-  activePage,
-  isAuthenticated: session?.isAuthenticated,
-});
-
-const mapDispatchToProps = {
-  setActivePage,
-  setKey,
-};
-
+const mapStateToProps = (state) => ({});
+const mapDispatchToProps = {};
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

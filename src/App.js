@@ -42,7 +42,8 @@ const App = () => {
     config.DEFAULT_EXT_VISIBILITY_STATE
   );
 
-  const toggleState = () => setAppVisibility((prev) => !prev);
+  const toggleState = () => 
+    setAppVisibility((prev) => !prev);
 
   const applicationContainerClasses = classnames("application-container", {
     extension: config.isExtension,
@@ -54,7 +55,7 @@ const App = () => {
       <div className="react-ui">
         {config.isApp ? (
           <div className={applicationContainerClasses}>
-            <AppContent />
+            <AppContent toggleState={toggleState} />
           </div>
         ) : (
           <Fragment>
