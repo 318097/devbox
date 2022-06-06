@@ -47,7 +47,11 @@ const getStyles = ({ appVisibility }) => {
       width: "300px",
       border: "none",
     };
-  return { height: "max-content", width: "max-content", border: "none" };
+  return {
+    height: "20px",
+    width: "20px",
+    border: "none",
+  };
 };
 
 const Iframe = ({ appVisibility, children, skipIframe }) =>
