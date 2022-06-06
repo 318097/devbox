@@ -1,18 +1,15 @@
-import React, { useState, useEffect, Fragment } from "react";
-
-// import axios from "axios";
+import React, { useState, useEffect } from "react";
 import AppContent from "./components/AppContent";
-import classnames from "classnames";
 import config from "./config";
-// import * as Sentry from "@sentry/react";
-// import { Integrations } from "@sentry/tracing";
 import { MemoryRouter, BrowserRouter } from "react-router-dom";
 import store from "./redux/store";
-import { Provider } from "react-redux";
+import { Provider, connect } from "react-redux";
 import Iframe from "./lib/wrapWithIFrame";
-
-// axios.defaults.baseURL = config.SERVER_URL;
-// axios.defaults.headers.common["external-source"] = DEVBOX";
+import { setDataInStorage, getDataFromStorage } from "./lib/storage";
+import { setKey } from "./redux/actions";
+import handleError from "./lib/errorHandling";
+// import * as Sentry from "@sentry/react";
+// import { Integrations } from "@sentry/tracing";
 
 // Sentry.init({
 //   environment: config.NODE_ENV,
@@ -25,52 +22,80 @@ import Iframe from "./lib/wrapWithIFrame";
 //   tracesSampleRate: 1.0,
 // });
 
+const App = ({ entityList, setKey }) => {
+  const [appVisibility, setAppVisibility] = useState();
+  const [initLoading, setInitLoading] = useState(true);
+
+  useEffect(() => {
+    load();
+  }, []);
+
+  useEffect(() => {
+    save({ appVisibility, entityList });
+  }, [appVisibility, entityList]);
+
+  const save = (data) => {
+    if (initLoading) return;
+
+    getDataFromStorage((prevState) => {
+      const updatedState = { ...prevState, ...data };
+      // console.log("saving:", updatedState);
+      setDataInStorage(updatedState);
+    });
+  };
+
+  const load = () => {
+    getDataFromStorage(async (state) => {
+      try {
+        /* Rehydrate the store */
+        setKey(state);
+        // console.log("reading::-", state);
+        toggleState(state.appVisibility);
+      } catch (error) {
+        handleError(error);
+      } finally {
+        // tracker.track("INIT", { path: state.activePage || "-" });
+        setTimeout(() => setInitLoading(false), 500);
+      }
+    });
+  };
+
+  const toggleState = (value) =>
+    setAppVisibility((prev) => (typeof value === "boolean" ? value : !prev));
+
+  return (
+    <Iframe appVisibility={appVisibility}>
+      <div className="react-ui">
+        {appVisibility ? (
+          <div className="application-container">
+            <AppContent toggleState={toggleState} initLoading={initLoading} />
+          </div>
+        ) : (
+          <span className="dot" onClick={() => toggleState()}></span>
+        )}
+      </div>
+    </Iframe>
+  );
+};
+
+const mapStateToProps = ({ entityList }) => ({ entityList });
+
+const mapDispatchToProps = {
+  setKey,
+};
+
+const AppWr = connect(mapStateToProps, mapDispatchToProps)(App);
+
 const Router = config.isApp ? BrowserRouter : MemoryRouter;
 
 const AppWrapper = () => (
   <Provider store={store}>
     <Router>
       {/* <Sentry.ErrorBoundary fallback={"An error has occurred"}> */}
-      <App />
+      <AppWr />
       {/* </Sentry.ErrorBoundary> */}
     </Router>
   </Provider>
 );
-
-const App = () => {
-  const [appVisibility, setAppVisibility] = useState(
-    config.DEFAULT_EXT_VISIBILITY_STATE
-  );
-
-  const toggleState = () => 
-    setAppVisibility((prev) => !prev);
-
-  const applicationContainerClasses = classnames("application-container", {
-    extension: config.isExtension,
-    application: config.isApp,
-  });
-
-  return (
-    <Iframe appVisibility={appVisibility}>
-      <div className="react-ui">
-        {config.isApp ? (
-          <div className={applicationContainerClasses}>
-            <AppContent toggleState={toggleState} />
-          </div>
-        ) : (
-          <Fragment>
-            {appVisibility ? (
-              <div className={applicationContainerClasses}>
-                <AppContent toggleState={toggleState} />
-              </div>
-            ) : (
-              <span className="dot" onClick={toggleState}></span>
-            )}
-          </Fragment>
-        )}
-      </div>
-    </Iframe>
-  );
-};
 
 export default AppWrapper;

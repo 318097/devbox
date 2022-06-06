@@ -56,6 +56,7 @@ const reducer = (state, action) => {
         ...entityFormData,
         _id: generateId(),
         createdAt: generateTime(),
+        sourceType: "LOCAL_STORAGE",
       };
       return {
         ...state,

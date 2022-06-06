@@ -11,7 +11,7 @@ const Header = ({ toggleState }) => {
       </div>
       <IconWrapper
         className="close-button"
-        onClick={toggleState}
+        onClick={() => toggleState()}
         type="close"
       />
     </header>
