@@ -8,7 +8,7 @@ import { setSession, setKey, setAppLoading } from "../redux/actions";
 import Footer from "./Footer";
 import "antd/dist/antd.css";
 
-const AppContent = (props) => {
+const Layout = (props) => {
   const { initLoading } = props;
   return (
     <div className="app-content">
@@ -31,4 +31,4 @@ const mapDispatchToProps = {
   setKey,
 };
 
-export default connect(null, mapDispatchToProps)(AppContent);
+export default connect(null, mapDispatchToProps)(Layout);

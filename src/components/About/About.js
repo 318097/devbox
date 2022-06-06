@@ -8,7 +8,7 @@ import { setAppLoading } from "../../redux/actions";
 import handleError from "../../lib/errorHandling";
 import tracker from "../../lib/mixpanel";
 
-const About = ({ appId, setAppLoading }) => {
+const About = ({ appId = "DEVBOX", setAppLoading }) => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -32,35 +32,16 @@ const About = ({ appId, setAppLoading }) => {
     }
   };
 
-  const copy = (input) => {
-    copyToClipboard(input);
-    notify("Copied!");
-  };
-
   return (
     <section id="about">
-      {/* <div className="block">
-        <div className="header-row">
-          <h3>Story</h3>
-        </div>
-        <div className="wrapper">
-        
-        </div>
-      </div> */}
-
       <div className="block">
         <div className="header-row">
           <h3>Contact</h3>
         </div>
         <div className="wrapper">
           Reach out to me at{" "}
-          <span
-            className="link"
-            onClick={() => copy("mehullakhanpal@gmail.com")}
-          >
-            mehullakhanpal@gmail.com
-          </span>{" "}
-          for any feedback/queries. <br />I am planning out v2 for this app.
+          <span className="link">mehullakhanpal@gmail.com</span> for any
+          feedback/queries. <br />
           Ping me if interested in collaborating.
         </div>
       </div>

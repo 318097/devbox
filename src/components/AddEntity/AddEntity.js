@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import "./AddItem.scss";
+import "./AddEntity.scss";
 import { InputWrapper, ButtonWrapper } from "../../lib/UI";
 import {
   addEntity,
@@ -15,7 +15,7 @@ import { useHistory } from "react-router-dom";
 //   { label: "Session storage", value: "SESSION_STORAGE" },
 // ];
 
-const AddItem = ({
+const AddEntity = ({
   addEntity,
   entityFormData,
   updateEntityData,
@@ -37,9 +37,9 @@ const AddItem = ({
   const handleOnChange = (e, value, valObj) => updateEntityData(valObj);
 
   return (
-    <section id="add-item">
+    <section id="add-entity">
       <h3>{`${entityFormMode === "EDIT" ? "Edit" : "Add"} entry`}</h3>
-      <div className="add-item-container flex column gap-4">
+      <div className="add-entity-container flex column gap-4">
         <InputWrapper
           placeholder={"Label"}
           value={entityFormData.label}
@@ -88,4 +88,4 @@ const mapDispatchToProps = {
   updateEntity,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddItem);
+export default connect(mapStateToProps, mapDispatchToProps)(AddEntity);

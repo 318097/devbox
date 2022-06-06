@@ -3,10 +3,9 @@
 section#about {
   display: flex;
   flex-direction: column;
+  gap: 8px;
   .block {
     border-bottom: 1px solid $strokeOne;
-    padding-bottom: 16px;
-    margin-bottom: 8px;
     .header-row {
       display: flex;
       align-items: center;
@@ -37,10 +36,9 @@ section#about {
     }
   }
   .products-list {
-    display: grid;
-    gap: 12px;
-    grid-template-columns: 1fr 1fr;
-    grid-auto-rows: 110px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
     .product-item {
       border: 1px solid $strokeOne;
       padding: 8px;
@@ -48,10 +46,13 @@ section#about {
       .product-title {
         font-weight: bold;
         text-decoration: underline;
-        margin-bottom: 8px;
+        margin-bottom: 4px;
+        font-size: 110%;
+        color: $cdGreen;
       }
       .product-description {
         line-height: 14px;
+        color: $steel;
       }
       &:hover {
         background: $bg;

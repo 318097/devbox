@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import AppContent from "./components/AppContent";
+import Layout from "./components/Layout";
 import config from "./config";
 import { MemoryRouter, BrowserRouter } from "react-router-dom";
 import store from "./redux/store";
@@ -68,7 +68,7 @@ const App = ({ entityList, setKey }) => {
       <div className="react-ui">
         {appVisibility ? (
           <div className="application-container">
-            <AppContent toggleState={toggleState} initLoading={initLoading} />
+            <Layout toggleState={toggleState} initLoading={initLoading} />
           </div>
         ) : (
           <span className="dot" onClick={() => toggleState()}></span>

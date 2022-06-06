@@ -43,7 +43,7 @@ const Home = ({ entityList = [], setEntityForEdit, deleteEntity }) => {
     switch (action) {
       case "edit":
         setEntityForEdit(_id);
-        history.push("/add-item");
+        history.push("/add-entity");
         break;
       case "delete":
         deleteEntity(_id);
@@ -67,7 +67,7 @@ const Home = ({ entityList = [], setEntityForEdit, deleteEntity }) => {
         <EmptyWrapper />
       )}
       <IconWrapper
-        onClick={() => history.push("/add-item")}
+        onClick={() => history.push("/add-entity")}
         type={"plus"}
         className="add-icon"
       />
