@@ -1,5 +1,3 @@
-import axios from "axios";
-import _ from "lodash";
 import constants from "./constants";
 import handleError from "../lib/errorHandling";
 import notify from "../lib/notify";
@@ -10,32 +8,10 @@ const setAppLoading = (payload) => ({
   payload,
 });
 
-const setSession = (payload) => ({
-  type: constants.SET_SESSION,
-  payload: payload,
-});
-
 const setKey = (payload) => ({
   type: constants.SET_KEY,
   payload: payload,
 });
-
-const setActivePage = (page) => ({
-  type: constants.SET_ACTIVE_PAGE,
-  payload: page,
-});
-
-const fetchEntityData = () => async (dispatch, getState) => {
-  try {
-    dispatch(setAppLoading(true));
-    const { data } = await axios.get(`/devbox`);
-    dispatch({ type: constants.FETCH_ENTITY_DATA, payload: data });
-  } catch (error) {
-    handleError(error);
-  } finally {
-    dispatch(setAppLoading(false));
-  }
-};
 
 const addEntity = () => async (dispatch) => {
   try {
@@ -84,13 +60,10 @@ const clearEntityFormData = () => ({
 });
 
 export {
-  setSession,
   setKey,
   setAppLoading,
-  fetchEntityData,
   clearEntityFormData,
   updateEntityData,
-  setActivePage,
   addEntity,
   deleteEntity,
   setEntityForEdit,

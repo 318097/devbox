@@ -4,7 +4,7 @@ import "../App.scss";
 import { connect } from "react-redux";
 import Header from "./Header";
 import Routes from "./Routes";
-import { setSession, setKey, setAppLoading } from "../redux/actions";
+import { setKey, setAppLoading } from "../redux/actions";
 import Footer from "./Footer";
 import "antd/dist/antd.css";
 
@@ -27,7 +27,6 @@ const Layout = (props) => {
 
 const mapDispatchToProps = {
   setAppLoading,
-  setSession,
   setKey,
 };
 

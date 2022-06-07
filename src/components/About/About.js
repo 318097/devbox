@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { copyToClipboard, getAndFormatProducts } from "@codedrops/lib";
-import notify from "../../lib/notify";
+import {  getAndFormatProducts } from "@codedrops/lib";
 import { connect } from "react-redux";
 import _ from "lodash";
 import "./About.scss";

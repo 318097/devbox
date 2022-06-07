@@ -1,7 +1,6 @@
 import _ from "lodash";
 import constants from "./constants";
-import shortid from "shortid";
-import { getRandomColor } from "../lib/helpers";
+import { getRandomColor, generateId, generateTime } from "../lib/helpers";
 
 const INITIAL_ENTITY_FORM_DATA = {};
 
@@ -10,12 +9,8 @@ const INITIAL_STATE = {
   selectedEntity: null,
   entityFormData: INITIAL_ENTITY_FORM_DATA,
   entityFormMode: "ADD",
-  session: {},
   entityList: [],
 };
-
-const generateId = () => shortid.generate();
-const generateTime = () => new Date().toISOString();
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -24,14 +19,6 @@ const reducer = (state, action) => {
         ...state,
         appLoading: action.payload,
       };
-
-    case constants.SET_SESSION: {
-      const updatedSession = { ...state.session, ...action.payload };
-      return {
-        ...state,
-        session: updatedSession,
-      };
-    }
 
     case constants.SET_KEY:
       return {
@@ -43,12 +30,6 @@ const reducer = (state, action) => {
       return {
         ...state,
         activePage: action.payload,
-      };
-
-    case constants.FETCH_ENTITY_DATA:
-      return {
-        ...state,
-        entityList: action.payload,
       };
 
     case constants.ADD_ENTITY: {

@@ -1,4 +1,3 @@
-import { getServerURL } from "@codedrops/lib";
 import app from "./appData";
 
 console.log("CONFIG:", __TYPE__, __ENV__);
@@ -9,7 +8,6 @@ const { MIXPANEL_TRACKING_ID, SENTRY_URL, MIXPANEL_TRACKING_ID_STAGING } =
 const isProd = __ENV__ === "production";
 
 const config = {
-  SERVER_URL: getServerURL({ isProd }),
   IS_LOCAL_STORAGE: __TYPE__ === "app",
   DEFAULT_EXT_VISIBILITY_STATE:
     __TYPE__ === "app" || (__TYPE__ === "ext" && __ENV__ === "development"),
