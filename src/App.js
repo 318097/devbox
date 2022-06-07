@@ -8,6 +8,7 @@ import Iframe from "./lib/wrapWithIFrame";
 import { setDataInStorage, getDataFromStorage } from "./lib/storage";
 import { setKey } from "./redux/actions";
 import handleError from "./lib/errorHandling";
+import Logo from "./assets/icons/logo.svg";
 // import * as Sentry from "@sentry/react";
 // import { Integrations } from "@sentry/tracing";
 
@@ -71,7 +72,9 @@ const App = ({ entityList, setKey }) => {
             <Layout toggleState={toggleState} initLoading={initLoading} />
           </div>
         ) : (
-          <span className="dot" onClick={() => toggleState()}></span>
+          <span className="logo" onClick={() => toggleState()}>
+            <Logo />
+          </span>
         )}
       </div>
     </Iframe>
