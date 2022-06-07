@@ -1,11 +1,8 @@
 {
   "name": "DEVBOX",
   "version": "1.0",
-  "description": "%app_tagline%",
+  "description": "Directly view local storage values on screen",
   "manifest_version": 3,
-  "background": {
-    "service_worker": "background.js"
-  },
   "permissions": [
     "storage"
   ],

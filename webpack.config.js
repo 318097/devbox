@@ -2,9 +2,6 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const webpack = require("webpack");
 const SentryWebpackPlugin = require("@sentry/webpack-plugin");
-const CopyPlugin = require("copy-webpack-plugin");
-// const BundleAnalyzerPlugin =
-//   require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 
 require("dotenv").config();
@@ -53,12 +50,6 @@ module.exports = (env) => {
           MODE === "app"
             ? "./src/entry/web/index.web.html"
             : "./src/entry/ext/index.ext.html",
-      }),
-    },
-    {
-      visible: NODE_ENV === "production",
-      plugin: new CopyPlugin({
-        patterns: [{ from: "./public", to: "." }],
       }),
     },
     // {
