@@ -1,6 +1,7 @@
 import _ from "lodash";
 import constants from "./constants";
 import shortid from "shortid";
+import { getRandomColor } from "../lib/helpers";
 
 const INITIAL_ENTITY_FORM_DATA = {};
 
@@ -57,6 +58,7 @@ const reducer = (state, action) => {
         _id: generateId(),
         createdAt: generateTime(),
         sourceType: "LOCAL_STORAGE",
+        color: getRandomColor(),
       };
       return {
         ...state,

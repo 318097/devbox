@@ -43,7 +43,7 @@ const iframeProps = {
 const getStyles = ({ appVisibility }) => {
   if (appVisibility)
     return {
-      height: "200px",
+      height: "204px",
       width: "300px",
       border: "none",
     };

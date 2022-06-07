@@ -16,6 +16,11 @@ import { copyToClipboard } from "@codedrops/lib";
 import notify from "../../lib/notify";
 import { setEntityForEdit, deleteEntity } from "../../redux/actions";
 
+const menuOptions = [
+  { label: "Edit", value: "edit" },
+  { label: "Delete", value: "delete" },
+];
+
 const parseJSON = ({ keyValue }) => {
   try {
     const value = JSON.parse(keyValue);
@@ -76,7 +81,7 @@ const Home = ({ entityList = [], setEntityForEdit, deleteEntity }) => {
 };
 
 const EntityItem = ({ entity, handleAction }) => {
-  const { label, keyName, path, _id } = entity;
+  const { label, keyName, path, _id, color } = entity;
 
   const value = parseValue({ keyName, path });
   const parsedLabel = value === "UNDEFINED_KEY" ? value : label;
@@ -87,50 +92,53 @@ const EntityItem = ({ entity, handleAction }) => {
     notify("Copied.");
   };
 
+  const tooltipContent = (
+    <div className="tooltip-wrapper">
+      <div className="tooltip-item">
+        <strong>Label:</strong>
+        <span>{parsedLabel}</span>
+      </div>
+      <div className="tooltip-item">
+        <strong>Local storage key:</strong>
+        <span>{keyName}</span>
+      </div>
+
+      {/* {!!path && (
+        <div className="tooltip-item">
+          <strong>Path:</strong>
+          <span>{path}</span>
+        </div>
+      )} */}
+
+      <div className="tooltip-item">
+        <strong>Value breakdown:</strong>
+        <span>
+          {path
+            ? `_.get(JSON.parse(localStorage.getItem('${keyName}')), '${path}')`
+            : `localStorage.getItem('${keyName}')`}
+        </span>
+      </div>
+    </div>
+  );
+
+  const parsedPath = path ? `'${keyName}.${path}'` : `'${keyName}`;
+
   return (
     <div className="entity-item">
-      <TooltipWrapper
-        title={
-          <div className="tooltip-wrapper">
-            <div className="tooltip-item">
-              <span>Label:</span>
-              <span>{parsedLabel}</span>
-            </div>
-            <div className="tooltip-item">
-              <span>Key name:</span>
-              <span>{keyName}</span>
-            </div>
-            {!!path && (
-              <div className="tooltip-item">
-                <span>Path:</span>
-                <span>{path}</span>
-              </div>
-            )}
-            <div className="tooltip-item">
-              <span>Value:</span>
-              <span>{`_.get(${keyName}, ${path})`}</span>
-            </div>
-          </div>
-        }
-      >
+      <TooltipWrapper title={tooltipContent}>
         <div className="entity-section-wrapper">
           <div className="entity-label">{parsedLabel}</div>
-          <div className="entity-path">
-            {path ? `'${keyName}.${path}'` : `'${keyName}`}
-          </div>
+          <div className="entity-path">{parsedPath}</div>
         </div>
       </TooltipWrapper>
 
-      <TagWrapper className="entity-value" onClick={copy}>
+      <TagWrapper className="entity-value" onClick={copy} color={color}>
         {parsedValue}
       </TagWrapper>
 
       <MenuWrapper
         onChange={(action) => handleAction(action, _id)}
-        options={[
-          { label: "Edit", value: "edit" },
-          { label: "Delete", value: "delete" },
-        ]}
+        options={menuOptions}
       />
     </div>
   );

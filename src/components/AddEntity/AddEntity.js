@@ -46,20 +46,18 @@ const AddEntity = ({
           name={"label"}
           onChange={handleOnChange}
         />
-        <div className="flex gap-4">
-          <InputWrapper
-            placeholder={"Key name"}
-            value={entityFormData.keyName}
-            name={"keyName"}
-            onChange={handleOnChange}
-          />
-          <InputWrapper
-            placeholder={"Path"}
-            value={entityFormData.path}
-            name={"path"}
-            onChange={handleOnChange}
-          />
-        </div>
+        <InputWrapper
+          placeholder={"Local storage key"}
+          value={entityFormData.keyName}
+          name={"keyName"}
+          onChange={handleOnChange}
+        />
+        <InputWrapper
+          placeholder={"Path (if value is nested in object)"}
+          value={entityFormData.path}
+          name={"path"}
+          onChange={handleOnChange}
+        />
         <div className="flex gap-4">
           <ButtonWrapper onClick={goBack}>Cancel</ButtonWrapper>
           <ButtonWrapper onClick={addPair} type="primary">{`${

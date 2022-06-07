@@ -1,6 +1,13 @@
 @import "@codedrops/react-ui/dist/styles/colors.scss";
 @import "@codedrops/react-ui/dist/styles/custom-styles.scss";
 
+.ant-input,
+.ant-btn,
+.ant-dropdown,
+.ant-dropdown-menu-item {
+  font-size: 12px !important;
+}
+
 .react-ui {
   font-family: "Roboto Mono", monospace;
   height: 100%;
