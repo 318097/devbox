@@ -9,6 +9,8 @@ import { setDataInStorage, getDataFromStorage } from "./lib/storage";
 import { setKey } from "./redux/actions";
 import handleError from "./lib/errorHandling";
 import Logo from "./assets/icons/logo.svg";
+import tracker from "./lib/mixpanel";
+import { generateId, generateTime } from "./lib/helpers";
 // import * as Sentry from "@sentry/react";
 // import { Integrations } from "@sentry/tracing";
 
@@ -23,7 +25,7 @@ import Logo from "./assets/icons/logo.svg";
 //   tracesSampleRate: 1.0,
 // });
 
-const App = ({ entityList, setKey }) => {
+const App = ({ entityList, setKey, user }) => {
   const [appVisibility, setAppVisibility] = useState();
   const [initLoading, setInitLoading] = useState(true);
 
@@ -32,11 +34,11 @@ const App = ({ entityList, setKey }) => {
   }, []);
 
   useEffect(() => {
-    save({ appVisibility, entityList });
-  }, [appVisibility, entityList]);
+    save({ appVisibility, entityList, user });
+  }, [appVisibility, entityList, user]);
 
   const save = (data) => {
-    if (initLoading) return;
+    // if (initLoading) return;
 
     getDataFromStorage((prevState) => {
       const updatedState = { ...prevState, ...data };
@@ -45,24 +47,45 @@ const App = ({ entityList, setKey }) => {
     });
   };
 
+  const loadUser = ({ user } = {}) => {
+    if (!user) {
+      user = {
+        createdAt: generateTime(),
+        _id: generateId(),
+      };
+
+      tracker.setIdentity(user, "id");
+      tracker.setUser(user);
+    }
+
+    return user;
+  };
+
   const load = () => {
     getDataFromStorage(async (state) => {
       try {
+        console.log("reading::-", state);
+        const user = loadUser(state);
         /* Rehydrate the store */
-        setKey(state);
-        // console.log("reading::-", state);
+        const updatedState = { ...state, user };
+
+        setKey(updatedState);
         toggleState(state.appVisibility);
+
+        //  tracker.track("INIT", { path: state.activePage || "-" });
       } catch (error) {
         handleError(error);
       } finally {
-        // tracker.track("INIT", { path: state.activePage || "-" });
         setTimeout(() => setInitLoading(false), 500);
       }
     });
   };
 
   const toggleState = (value) =>
-    setAppVisibility((prev) => (typeof value === "boolean" ? value : !prev));
+    setAppVisibility((prev) => {
+      const newValue = typeof value === "boolean" ? value : !prev;
+      return newValue;
+    });
 
   return (
     <Iframe appVisibility={appVisibility}>
@@ -72,7 +95,16 @@ const App = ({ entityList, setKey }) => {
             <Layout toggleState={toggleState} initLoading={initLoading} />
           </div>
         ) : (
-          <span className="logo" onClick={() => toggleState()}>
+          <span
+            className="logo"
+            onClick={() => {
+              toggleState();
+              tracker.track("ACTION", {
+                command: "open",
+                type: "App visibility",
+              });
+            }}
+          >
             <Logo />
           </span>
         )}
@@ -81,7 +113,7 @@ const App = ({ entityList, setKey }) => {
   );
 };
 
-const mapStateToProps = ({ entityList }) => ({ entityList });
+const mapStateToProps = ({ entityList, user }) => ({ entityList, user });
 
 const mapDispatchToProps = {
   setKey,

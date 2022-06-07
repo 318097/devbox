@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import app from "../appData";
 import { IconWrapper } from "../lib/UI";
 import { useHistory } from "react-router-dom";
+import tracker from "../lib/mixpanel";
 
 const Header = ({ toggleState }) => {
   const history = useHistory();
@@ -22,7 +23,13 @@ const Header = ({ toggleState }) => {
         />
         <IconWrapper
           className="close-button"
-          onClick={() => toggleState()}
+          onClick={() => {
+            toggleState();
+            tracker.track("ACTION", {
+              command: "close",
+              type: "App visibility",
+            });
+          }}
           type="close"
         />
       </div>

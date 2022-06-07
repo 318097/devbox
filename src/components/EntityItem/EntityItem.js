@@ -14,6 +14,7 @@ const EntityItem = ({ entity, handleAction }) => {
 
   const copy = () => {
     copyToClipboard(parsedValue);
+    tracker.track("ACTION", { command: "copy", type: "Entity value" });
     notify("Copied.");
   };
 

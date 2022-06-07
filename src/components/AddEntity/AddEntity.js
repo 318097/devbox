@@ -9,6 +9,7 @@ import {
   updateEntity,
 } from "../../redux/actions";
 import { useHistory } from "react-router-dom";
+import tracker from "../../lib/mixpanel";
 
 // const sourceOptions = [
 //   { label: "Local storage", value: "LOCAL_STORAGE" },
@@ -22,6 +23,7 @@ const AddEntity = ({
   entityFormMode,
   updateEntity,
   selectedEntity,
+  clearEntityFormData,
 }) => {
   const history = useHistory();
 
@@ -30,9 +32,16 @@ const AddEntity = ({
       await updateEntity({ ...selectedEntity, ...entityFormData });
     else await addEntity();
     history.push("/");
+    tracker.track("ACTION", {
+      command: entityFormMode === "EDIT" ? "update" : "add",
+      type: "Entity item",
+    });
   };
 
-  const goBack = () => history.push("/");
+  const goBack = () => {
+    history.push("/");
+    clearEntityFormData();
+  };
 
   const handleOnChange = (e, value, valObj) => updateEntityData(valObj);
 

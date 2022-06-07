@@ -11,6 +11,7 @@ const Home = ({ entityList = [], setEntityForEdit, deleteEntity }) => {
   const history = useHistory();
 
   const handleAction = (action, _id) => {
+    tracker.track("ACTION", { command: action, type: "Entity item" });
     switch (action) {
       case "edit":
         setEntityForEdit(_id);
@@ -38,7 +39,10 @@ const Home = ({ entityList = [], setEntityForEdit, deleteEntity }) => {
         <EmptyWrapper />
       )}
       <IconWrapper
-        onClick={() => history.push("/add-entity")}
+        onClick={() => {
+          history.push("/add-entity");
+          tracker.track("NAVIGATION", { name: "add entity" });
+        }}
         type={"plus"}
         className="add-icon"
       />

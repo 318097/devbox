@@ -20,7 +20,6 @@ const addEntity = () => async (dispatch) => {
       type: constants.ADD_ENTITY,
     });
     notify("Created.");
-    // tracker.track("ADD_ENTITY");
   } catch (error) {
     handleError(error);
   } finally {
