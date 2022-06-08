@@ -15,7 +15,7 @@ const EntityItem = ({ entity, handleAction }) => {
   const copy = () => {
     copyToClipboard(parsedValue);
     tracker.track("ACTION", { command: "copy", type: "Entity value" });
-    notify("Copied.");
+    notify("Copied");
   };
 
   const tooltipContent = (
@@ -47,7 +47,7 @@ const EntityItem = ({ entity, handleAction }) => {
     </div>
   );
 
-  const parsedPath = path ? `'${keyName}.${path}'` : `'${keyName}`;
+  const parsedPath = path ? `'${keyName}.${path}'` : `'${keyName}'`;
 
   return (
     <div className="entity-item">
@@ -57,10 +57,15 @@ const EntityItem = ({ entity, handleAction }) => {
           <div className="entity-path">{parsedPath}</div>
         </div>
       </TooltipWrapper>
-
-      <TagWrapper className="entity-value" onClick={copy} color={color}>
-        {parsedValue}
-      </TagWrapper>
+      <TooltipWrapper
+        title={<div style={{ fontSize: ".7em" }}>{parsedValue}</div>}
+        trigger={"hover"}
+        placement="bottom"
+      >
+        <TagWrapper className="entity-value" onClick={copy} color={color}>
+          {parsedValue}
+        </TagWrapper>
+      </TooltipWrapper>
 
       <MenuWrapper
         onChange={(action) => handleAction(action, _id)}

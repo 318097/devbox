@@ -53,6 +53,11 @@ const parseValue = ({ keyName, path }) => {
   return String(processedValue) ?? "UNDEFINED_VALUE";
 };
 
+const generateLead = () => ({
+  createdAt: generateTime(),
+  _id: generateId(),
+});
+
 export {
   getRandomColor,
   generateId,
@@ -60,4 +65,5 @@ export {
   menuOptions,
   parseJSON,
   parseValue,
+  generateLead,
 };

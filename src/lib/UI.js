@@ -145,10 +145,10 @@ const TagWrapper = ({ children, ...rest }) => {
 const TooltipWrapper = ({ children, ...rest }) => {
   return (
     <Tooltip
-      {...rest}
       placement="bottomRight"
       trigger="click"
       arrowPointAtCenter={true}
+      {...rest}
     >
       {children}
     </Tooltip>

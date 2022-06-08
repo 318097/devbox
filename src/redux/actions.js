@@ -19,7 +19,7 @@ const addEntity = () => async (dispatch) => {
     await dispatch({
       type: constants.ADD_ENTITY,
     });
-    notify("Created.");
+    notify("Created");
   } catch (error) {
     handleError(error);
   } finally {

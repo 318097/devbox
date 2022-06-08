@@ -8,8 +8,8 @@
   "scripts": {
     "clean": "rimraf './ext/build'",
     "dev:app": "webpack server --env NODE_ENV=development MODE=app",
-    "build:app": "webpack --env NODE_ENV=production MODE=app",
     "dev:ext": "webpack --env NODE_ENV=development MODE=ext",
+    "build:app": "webpack --env NODE_ENV=production MODE=app",
     "build:ext": "npm run clean && webpack --env NODE_ENV=production MODE=ext",
     "lint": "eslint --ext js,jsx src/",
     "fix": "eslint --fix src/"

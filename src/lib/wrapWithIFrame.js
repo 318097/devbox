@@ -27,7 +27,7 @@ const initialContent = `
           margin: 0;
         }
         body{
-          background: #eee;
+          background: #5c5c5c !important;
         }
       </style>
     </head>

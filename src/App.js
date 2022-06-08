@@ -10,7 +10,8 @@ import { setKey } from "./redux/actions";
 import handleError from "./lib/errorHandling";
 import Logo from "./assets/icons/logo.svg";
 import tracker from "./lib/mixpanel";
-import { generateId, generateTime } from "./lib/helpers";
+import { generateLead } from "./lib/helpers";
+
 // import * as Sentry from "@sentry/react";
 // import { Integrations } from "@sentry/tracing";
 
@@ -49,10 +50,7 @@ const App = ({ entityList, setKey, user }) => {
 
   const loadUser = ({ user } = {}) => {
     if (!user) {
-      user = {
-        createdAt: generateTime(),
-        _id: generateId(),
-      };
+      user = generateLead();
 
       tracker.setIdentity(user, "id");
       tracker.setUser(user);
@@ -64,7 +62,7 @@ const App = ({ entityList, setKey, user }) => {
   const load = () => {
     getDataFromStorage(async (state) => {
       try {
-        console.log("reading::-", state);
+        // console.log("reading::-", state);
         const user = loadUser(state);
         /* Rehydrate the store */
         const updatedState = { ...state, user };
