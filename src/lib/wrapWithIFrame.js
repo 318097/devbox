@@ -26,9 +26,6 @@ const initialContent = `
           padding: 0; 
           margin: 0;
         }
-        body{
-          background: #5c5c5c !important;
-        }
       </style>
     </head>
     <body>
