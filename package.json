@@ -1,7 +1,7 @@
 {
-  "name": "app",
+  "name": "devbox",
   "version": "1.0.0",
-  "description": "Directly view local storage values on screen",
+  "description": "A UI for local storage",
   "keywords": [],
   "author": "",
   "license": "ISC",

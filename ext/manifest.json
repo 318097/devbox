@@ -1,7 +1,7 @@
 {
   "name": "Devbox",
   "version": "1.0",
-  "description": "Directly view local storage values on screen",
+  "description": "A UI for local storage",
   "manifest_version": 3,
   "permissions": [
     "storage"

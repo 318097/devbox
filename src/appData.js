@@ -1,7 +1,7 @@
 const app = {
   appId: "DEVBOX",
   appName: "Devbox",
-  appTagline: "Directly view local storage values on screen",
+  appTagline: "A UI for local storage",
 };
 
 export default app;
