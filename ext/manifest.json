@@ -1,6 +1,6 @@
 {
   "name": "Devbox",
-  "version": "1.0",
+  "version": "1.1",
   "description": "A UI for local storage",
   "manifest_version": 3,
   "permissions": [
