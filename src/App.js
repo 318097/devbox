@@ -69,8 +69,6 @@ const App = ({ entityList, setKey, user }) => {
 
         setKey(updatedState);
         toggleState(state.appVisibility);
-
-        //  tracker.track("INIT", { path: state.activePage || "-" });
       } catch (error) {
         handleError(error);
       } finally {

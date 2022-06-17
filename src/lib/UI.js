@@ -134,8 +134,8 @@ const MenuWrapper = (props) => {
   );
 };
 
-const EmptyWrapper = () => {
-  return <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />;
+const EmptyWrapper = (props) => {
+  return <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} {...props} />;
 };
 
 const TagWrapper = ({ children, ...rest }) => {

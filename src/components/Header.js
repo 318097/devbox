@@ -1,5 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
 import app from "../appData";
 import { IconWrapper } from "../lib/UI";
 import { useHistory } from "react-router-dom";
@@ -37,6 +36,4 @@ const Header = ({ toggleState }) => {
   );
 };
 
-const mapStateToProps = (state) => ({});
-const mapDispatchToProps = {};
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default Header;

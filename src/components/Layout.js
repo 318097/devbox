@@ -1,11 +1,9 @@
-import { Loading } from "@codedrops/react-ui";
 import React from "react";
 import "../App.scss";
 import { connect } from "react-redux";
 import Header from "./Header";
 import Routes from "./Routes";
 import { setKey, setAppLoading } from "../redux/actions";
-import Footer from "./Footer";
 import "antd/dist/antd.css";
 
 const Layout = (props) => {
@@ -15,12 +13,11 @@ const Layout = (props) => {
       <Header {...props} />
       <div className="section-container">
         {initLoading ? (
-          <Loading type="dot-loader" background="white" />
+          <div className="pl-8">Loading..</div>
         ) : (
           <Routes {...props} />
         )}
       </div>
-      <Footer />
     </div>
   );
 };
