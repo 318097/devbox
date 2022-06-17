@@ -9,7 +9,7 @@
 - Add: Mixpanel tracking
 - Add: About page
 
-#### v1.2
+#### v1.2 (released on 17-06-2022)
 
 - Refactor: Cleaned global header styles & link tag
 - Refactor: Switched to ant 'message'
