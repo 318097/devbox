@@ -14,6 +14,10 @@
 - Refactor: Cleaned global header styles & link tag
 - Refactor: Switched to ant 'message'
 
+#### v1.3 (released on 13-07-2022)
+
+- Fix: Expose `IS_PROD` from config
+
 #### v2.0
 
 - [] Add support for session storage
